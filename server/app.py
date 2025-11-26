@@ -224,7 +224,7 @@ def submit_rab():
                 f"Tidak ada email Koordinator yang ditemukan untuk cabang '{cabang}'."
             )
 
-        base_url = "https://building-alfamart.onrender.com"
+        base_url = "https://instruksilapangan.onrender.com"
         approver_for_link = coordinator_emails[0]
         approval_url = (
             f"{base_url}/api/handle_rab_approval"
