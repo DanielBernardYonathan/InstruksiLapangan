@@ -22,14 +22,14 @@ load_dotenv()
 app = Flask(__name__)
 
 CORS(app,
-     origins=[
-         "http://127.0.0.1:5500",
-         "http://localhost:5500",
-         "https://instruksi-lapangan-coral.vercel.app"
-     ],
-     methods=["GET", "POST", "OPTIONS", "PUT", "PATCH", "DELETE"],
-     allow_headers=["Content-Type", "Authorization"],
-     supports_credentials=True
+    origins=[
+        "http://127.0.0.1:5500",
+        "http://localhost:5500",
+        "https://instruksi-lapangan-coral.vercel.app"
+    ],
+    methods=["GET", "POST", "OPTIONS", "PUT", "PATCH", "DELETE"],
+    allow_headers=["Content-Type", "Authorization"],
+    supports_credentials=True
 )
 
 google_provider = GoogleServiceProvider()
@@ -375,7 +375,7 @@ def handle_rab_approval():
             if manager_email:
                 row_data[config.COLUMN_NAMES.KOORDINATOR_APPROVER] = approver
                 row_data[config.COLUMN_NAMES.KOORDINATOR_APPROVAL_TIME] = current_time
-                base_url = "https://building-alfamart.onrender.com"
+                base_url = "https://instruksilapangan.onrender.com"
                 approval_url_manager = f"{base_url}/api/handle_rab_approval?action=approve&row={row}&level=manager&approver={manager_email}"
                 rejection_url_manager = f"{base_url}/api/reject_form/rab?row={row}&level=manager&approver={manager_email}"
                 email_html_manager = render_template('email_template.html', doc_type="RAB", level='Manajer', form_data=row_data, approval_url=approval_url_manager, rejection_url=rejection_url_manager, additional_info=f"Telah disetujui oleh Koordinator: {approver}")
@@ -634,7 +634,7 @@ def submit_spk():
         if not branch_manager_email:
             raise Exception(f"Branch Manager email for branch '{cabang}' not found.")
 
-        base_url = "https://building-alfamart.onrender.com"
+        base_url = "https://instruksilapangan.onrender.com"
         approval_url = f"{base_url}/api/handle_spk_approval?action=approve&row={row_to_notify}&approver={branch_manager_email}"
         rejection_url = f"{base_url}/api/reject_form/spk?row={row_to_notify}&approver={branch_manager_email}"
 
@@ -979,10 +979,10 @@ def submit_pengawasan():
         next_url_with_redirect = f"{base_url.strip('/')}/?redirectTo={next_form_path}" if next_form_path != '#' else None
 
         email_html = render_template('pengawasan_email_template.html', 
-                                     form_data=data,
-                                     user_info=user_info,
-                                     next_form_url=next_url_with_redirect,
-                                     form_type=form_type
+                                    form_data=data,
+                                    user_info=user_info,
+                                    next_form_url=next_url_with_redirect,
+                                    form_type=form_type
                                     )
         
         google_provider.send_email(
